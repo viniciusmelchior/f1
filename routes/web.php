@@ -49,6 +49,10 @@ route::post('/adiciona-campeao', [CampeaoController::class, 'store'])->name('adi
 route::get('form-adiciona-evento', [EventoController::class, 'create'])->name('form-adiciona-evento');
 route::post('adiciona-evento', [EventoController::class, 'store'])->name('adiciona-evento');
 
+route::get('deleta-evento/{id}', [EventoController::class, 'destroy'])->name('deleta-evento');
+route::get('form-edita-evento/{id}', [EventoController::class, 'edit'])->name('form-edita-evento');
+route::put('form-edita-evento/edita-evento/{id}', [EventoController::class, 'update'])->name('edita-evento');
+
 
 
 

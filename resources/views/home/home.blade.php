@@ -229,8 +229,10 @@
                     <td>{{$resultado->primeiroPiloto->nome}} / {{$resultado->primeiroEquipe->nome}}</td>
                     <td>{{$resultado->segundoPiloto->nome}} / {{$resultado->segundoEquipe->nome}}</td>
                     <td>{{$resultado->terceiroPiloto->nome}} / {{$resultado->terceiroEquipe->nome}}</td>
-                    <td>{{$resultado->eu_largada}}</td>
-                    <td>{{$resultado->eu_chegada}}</td>
+                    {{-- <td>{{$resultado->eu_largada}}</td> --}}
+                    <td><a href="{{url("form-edita-evento/$resultado->id")}}">Editar</a></td>
+                    {{-- <td>{{$resultado->eu_chegada}}</td> --}}
+                    <td><a href="{{url("deleta-evento/$resultado->id")}}">Apagar</a></td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -246,7 +248,7 @@
 
 
     <!--PARTE DE TESTES-->
-    <h1>Home - Projeto Formula 1</h2>
+   {{--  <h1>Home - Projeto Formula 1</h2>
 
         <div>
             <h3>Temporadas</h3>
@@ -279,7 +281,7 @@
             <p>Títulos: {{$equipe->titulos}}</p>
             <hr>
             @endforeach
-        </div>
+        </div> --}}
 
         
 

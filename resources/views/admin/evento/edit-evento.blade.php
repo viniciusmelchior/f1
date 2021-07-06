@@ -12,11 +12,12 @@
 
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-              <h1 class="display-4 text-center">Criar evento</h1>
+              <h1 class="display-4 text-center">Editar GP {{$resultado->corrida->pista->nome}} - {{$resultado->corrida->temporada->ano}}</h1>
             </div>
           </div>
-          <form method="post" action="{{route('adiciona-evento')}}">
+          <form method="post" action="edita-evento/{{$resultado->id}}">
           @csrf
+          @method('PUT')
             <div class="form-group row">
                <div class="col-2">
                 <label for="corrida_temporada">Temporada</label>
@@ -24,7 +25,10 @@
              <div class="col-10">
                 <select class="form-control" id="corrida_temporada" name="temporada_id">
                    @foreach($temporadas as $temporada)
-                        <option value="{{$temporada->id}}">{{$temporada->ano}}</option>
+                        <option value="{{$temporada->id}}"
+                            {{ $temporada->id == $resultado->corrida->temporada->id ? 'selected' : ''}}>
+                            {{$temporada->ano}}
+                        </option>
                    @endforeach
                   </select>
              </div>
@@ -36,7 +40,10 @@
                 <div class="col-10">
                     <select class="form-control" id="corrida_pista" name="pista_id">
                             @foreach($pistas as $pista)
-                                <option value="{{$pista->id}}">{{$pista->nome}}</option>
+                                <option value="{{$pista->id}}"
+                                    {{$pista->nome == $resultado->corrida->pista->nome ? 'selected' : ''}}>
+                                    {{$pista->nome}}
+                                </option>
                              @endforeach
                       </select>
                 </div>
@@ -48,7 +55,10 @@
                 <div class="col-10">
                     <select class="form-control" id="pole_piloto" name="pole_piloto">
                             @foreach($pilotos as $piloto)
-                                <option value="{{$piloto->id}}">{{$piloto->nome}}</option>
+                                <option value="{{$piloto->id}}"
+                                    {{$piloto->nome == $resultado->polePiloto->nome ? 'selected' : ''}}>
+                                    {{$piloto->nome}}
+                                </option>
                              @endforeach
                       </select>
                 </div>
@@ -60,7 +70,10 @@
                 <div class="col-10">
                     <select class="form-control" id="pole_equipe" name="pole_equipe">
                             @foreach($equipes as $equipe)
-                                <option value="{{$equipe->id}}">{{$equipe->nome}}</option>
+                                <option value="{{$equipe->id}}"
+                                    {{$equipe->nome == $resultado->poleEquipe->nome ? 'selected' : ''}}>
+                                    {{$equipe->nome}}
+                                </option>
                              @endforeach
                       </select>
                 </div>
@@ -72,7 +85,10 @@
                 <div class="col-10">
                     <select class="form-control" id="primeiro_piloto" name="primeiro_piloto">
                             @foreach($pilotos as $piloto)
-                                <option value="{{$piloto->id}}">{{$piloto->nome}}</option>
+                                <option value="{{$piloto->id}}"
+                                    {{$piloto->nome == $resultado->primeiroPiloto->nome ? 'selected' : ''}}>
+                                    {{$piloto->nome}}
+                                </option>
                              @endforeach
                       </select>
                 </div>
@@ -84,7 +100,10 @@
                 <div class="col-10">
                     <select class="form-control" id="primeiro_equipe" name="primeiro_equipe">
                              @foreach($equipes as $equipe)
-                                <option value="{{$equipe->id}}">{{$equipe->nome}}</option>
+                                <option value="{{$equipe->id}}"
+                                    {{$equipe->nome == $resultado->primeiroEquipe->nome ? 'selected' : ''}}>
+                                    {{$equipe->nome}}
+                                </option>
                              @endforeach
                       </select>
                 </div>
@@ -96,7 +115,10 @@
                 <div class="col-10">
                     <select class="form-control" id="segundo_piloto" name="segundo_piloto">
                             @foreach($pilotos as $piloto)
-                                <option value="{{$piloto->id}}">{{$piloto->nome}}</option>
+                                <option value="{{$piloto->id}}"
+                                    {{$piloto->nome == $resultado->segundoPiloto->nome ? 'selected' : ''}}>
+                                    {{$piloto->nome}}
+                                </option>
                              @endforeach
                       </select>
                 </div>
@@ -108,7 +130,10 @@
                 <div class="col-10">
                     <select class="form-control" id="segundo_equipe" name="segundo_equipe">
                             @foreach($equipes as $equipe)
-                                <option value="{{$equipe->id}}">{{$equipe->nome}}</option>
+                                <option value="{{$equipe->id}}"
+                                    {{$equipe->nome == $resultado->segundoEquipe->nome ? 'selected' : ''}}>
+                                    {{$equipe->nome}}
+                                </option>
                              @endforeach
                       </select>
                 </div>
@@ -120,7 +145,10 @@
                 <div class="col-10">
                     <select class="form-control" id="terceiro_piloto" name="terceiro_piloto">
                             @foreach($pilotos as $piloto)
-                                <option value="{{$piloto->id}}">{{$piloto->nome}}</option>
+                                <option value="{{$piloto->id}}"
+                                    {{$piloto->nome == $resultado->terceiroPiloto->nome ? 'selected' : ''}}>
+                                    {{$piloto->nome}}
+                                </option>
                              @endforeach
                       </select>
                 </div>
@@ -132,7 +160,10 @@
                 <div class="col-10">
                     <select class="form-control" id="terceiro_equipe" name="terceiro_equipe">
                             @foreach($equipes as $equipe)
-                                <option value="{{$equipe->id}}">{{$equipe->nome}}</option>
+                                <option value="{{$equipe->id}}"
+                                    {{$equipe->nome == $resultado->terceiroEquipe->nome ? 'selected' : ''}}>
+                                    {{$equipe->nome}}
+                                </option>
                              @endforeach
                       </select>
                 </div>
@@ -142,7 +173,7 @@
                     <label for="eu_largada">Eu - Largada</label>
                 </div>
                 <div class="col-10">
-                   <input type="number" name="eu_largada" id="eu_largada" class="form-control" min="1" max="22">
+                   <input type="number" name="eu_largada" id="eu_largada" class="form-control" min="1" max="22" value="{{$resultado->eu_largada}}">
                 </div>
               </div>
               <div class="form-group row">
@@ -150,7 +181,7 @@
                     <label for="eu_chegada">Eu - Chegada</label>
                 </div>
                 <div class="col-10">
-                   <input type="number" name="eu_chegada" id="eu_chegada" class="form-control" min="1" max="22">
+                   <input type="number" name="eu_chegada" id="eu_chegada" class="form-control" min="1" max="22" value="{{$resultado->eu_chegada}}">
                 </div>
               </div>
               <div class="d-flex">
