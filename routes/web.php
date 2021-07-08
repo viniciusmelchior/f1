@@ -54,6 +54,9 @@ route::get('form-edita-evento/{id}', [EventoController::class, 'edit'])->name('f
 route::put('form-edita-evento/edita-evento/{id}', [EventoController::class, 'update'])->name('edita-evento');
 
 
+route::get('deleta-campeao/{id}', [CampeaoController::class, 'destroy'])->name('deleta-campeao');
+
+
 
 
 //Route::get('/user', [UserController::class, 'index']);

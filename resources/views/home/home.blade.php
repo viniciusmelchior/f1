@@ -160,6 +160,7 @@
                 <th scope="col">Temporada</th>
                 <th scope="col">Piloto Campeão</th>
                 <th scope="col">Equipe Campeã</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody>
@@ -168,6 +169,8 @@
                         <td>{{$campeao->temporada->ano}}</td>
                         <td>{{$campeao->piloto->nome}}</td>
                         <td>{{$campeao->equipe->nome}}</td>
+                        <td><a href="">Editar</a></td>
+                        <td><a href="{{url("deleta-campeao/$campeao->id")}}">Apagar</a></td>
                     </tr>
                 @endforeach
               

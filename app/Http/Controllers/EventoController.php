@@ -257,7 +257,7 @@ class EventoController extends Controller
     {   
         //selecionar o id e pegar os dados
         $resultado = Resultado::find($id);
-        $idPole = $resultado->pole_piloto;
+        //$idPole = $resultado->pole_piloto;
         Resultado::find($id)->delete();
         //dd($idPole);
        

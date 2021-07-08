@@ -58,23 +58,6 @@ class CampeaoController extends Controller
             'equipe_id' => $equipeCampea
        ]);
         
-         //############## TITULO DO PILOTO ############################################
-
-       //busca quantos titulos o piloto campeao tem até o momento
-        //$titulosPilotoAteOMomento = Piloto::where('id', $pilotoCampeao)->select('titulos')->first()->titulos;
-        //calculo de atualização
-        //$tituloPilotoUpdate = $titulosPilotoAteOMomento+1;
-        //update do campo titulo do respectivo piloto
-        //Piloto::where('id', $pilotoCampeao)->update(['titulos' => $tituloPilotoUpdate]);
-
-        //############## TITULO DA EQUIPE ############################################
-
-        //$titulosEquipeAteOMomento = Equipe::where('id', $equipeCampea)->select('titulos')->first()->titulos;
-        //$tituloEquipeUpdate = $titulosEquipeAteOMomento+1;
-        //Equipe::where('id', $equipeCampea)->update(['titulos' => $tituloEquipeUpdate]);
-
-        //refatorando TITULOS de PILOTO
-
         $pilotos = Piloto::all();
         $equipes = Equipe::all();
 
@@ -135,6 +118,21 @@ class CampeaoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //selecionar o id e pegar os dados
+        $campeao = Campeao::find($id);
+
+         //deletar da tabela
+        Campeao::find($id)->delete();
+
+        //atualizar dados do piloto e da equipe
+
+        $titulosPilotoUpdate = Campeao::where('piloto_id', $campeao->piloto_id)->count();
+        Piloto::where('id', $campeao->piloto_id)->update(['titulos' => $titulosPilotoUpdate]);
+        
+        $titulosEquipeUpdate = Campeao::where('equipe_id', $campeao->equipe_id)->count();
+        Equipe::where('id', $campeao->equipe_id)->update(['titulos' => $titulosEquipeUpdate]);
+
+        return redirect()->back();
+        
     }
 }
