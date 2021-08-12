@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Piloto;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        //Piloto::factory()->create();
+        //$this->call(PaisesTableSeeder::class);
+        //$this->call(PilotosTableSeeder::class);
+        $this->call(TemporadasTableSeeder::class);
     }
 }

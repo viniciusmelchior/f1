@@ -94,8 +94,14 @@ class CampeaoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        $temporadas = Temporada::all();
+        $pilotos = Piloto::all();
+        $equipes = Equipe::all();
+
+        $campeao = Campeao::find($id);
+
+        return view('admin.campeao.form-edit-campeao', ['temporadas' => $temporadas, 'pilotos' => $pilotos, 'equipes' => $equipes, 'campeao' => $campeao]);
     }
 
     /**
@@ -106,8 +112,43 @@ class CampeaoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+
+        $campeao = Campeao::find($id);
+
+        $temporada = $request->temporada_id;
+        $pilotoCampeao = $request->piloto_id;
+        $equipeCampea = $request->equipe_id;
+
+        $campeao->update([
+            'temporada_id' => $temporada,
+            'piloto_id' => $pilotoCampeao,
+            'equipe_id' => $equipeCampea
+       ]);
+
+        $pilotos = Piloto::all();
+        $equipes = Equipe::all();
+        $campeoes = Campeao::all();
+
+        foreach($pilotos as $piloto){
+            $titulosPilotoUpdate = Campeao::where('piloto_id', $piloto->id)->count();
+            Piloto::where('id', $piloto->id)->update(['titulos' => $titulosPilotoUpdate]);   
+        }
+
+        //teste update
+        foreach($campeoes as $campeao){
+
+        }
+        
+        Piloto::where('id', $piloto->id)->update(['titulos' => $titulosPilotoUpdate]);
+
+        foreach($equipes as $equipe){
+            $titulosEquipeUpdate = Campeao::where('equipe_id', $equipe->id)->count();
+            Equipe::where('id', $equipe->id)->update(['titulos' => $titulosEquipeUpdate]);   
+        }
+
+        return redirect('/');
+        
     }
 
     /**

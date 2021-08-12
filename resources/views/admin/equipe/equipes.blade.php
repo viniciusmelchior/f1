@@ -23,7 +23,8 @@
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect2">País de Origem</label>
-                <select multiple class="form-control" id="pais_id" name="pais_id">
+                <select class="form-control" id="pais_id" name="pais_id">
+                  <option value="" disabled selected>--Selecione um País--</option>
                    @foreach ($paises as $pais)
                        <option value="{{$pais->id}}">{{$pais->nome}}</option>
                    @endforeach 

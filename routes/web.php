@@ -55,6 +55,8 @@ route::put('form-edita-evento/edita-evento/{id}', [EventoController::class, 'upd
 
 
 route::get('deleta-campeao/{id}', [CampeaoController::class, 'destroy'])->name('deleta-campeao');
+route::get('edita-campeao/{id}', [CampeaoController::class, 'edit'])->name('edita-campeao');
+route::put('editar-campeao/{id}', [CampeaoController::class, 'update'])->name('edita-campeao');
 
 
 

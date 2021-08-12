@@ -7,11 +7,13 @@ use App\Models\Pista;
 use App\Models\Temporada;
 use App\Models\Corrida;
 use App\Models\Resultado;
+use App\Http\Controllers\HomeController;
 
 use Illuminate\Http\Request;
 
 class EventoController extends Controller
-{
+{   
+   
     /**
      * Display a listing of the resource.
      *
@@ -60,13 +62,23 @@ class EventoController extends Controller
         $temporada_id = $request->temporada_id;
         $pista_id = $request->pista_id;
 
+        //verificar se o evento/corrida já existe
+        $corrida = new Corrida();
+        $existe = $corrida->where('temporada_id', $temporada_id)->where('pista_id', $pista_id)->get()->first();
+
+        if(isset($existe->temporada_id) && isset($existe->pista_id)){
+            return back()->withErrors(['errors' => 'Evento ja cadastrado anteriormente']);
+        } 
+
+        //inserir validações
+
         //criar corrida
         $corrida = Corrida::create([
             'temporada_id' => $temporada_id,
             'pista_id' => $pista_id
         ]);
         
-        //pensar num jeito de pegar a corrida criada e já recuperar o id dela
+        //pegar a corrida criada e já recuperar o id dela
         $ultimoId = $corrida->id;
         //criar resultado
         $corrida_id = $ultimoId;
@@ -199,8 +211,6 @@ class EventoController extends Controller
         $eu_largada = $request->eu_largada;
         $eu_chegada = $request->eu_chegada;
         
-        //refatorando atualizações no banco
-        
         //salvar o evento no banco 
         $resultado->update([
             //'corrida_id' => $corrida_id,
@@ -257,10 +267,13 @@ class EventoController extends Controller
     {   
         //selecionar o id e pegar os dados
         $resultado = Resultado::find($id);
-        //$idPole = $resultado->pole_piloto;
         Resultado::find($id)->delete();
-        //dd($idPole);
+
+        $CorridaApagar = Corrida::where('id', $resultado->corrida_id);
+        $CorridaApagar->delete();
+
        
+    
         $vitoriasPilotoUpdate = Resultado::where('primeiro_piloto', $resultado->primeiro_piloto)->count();
         Piloto::where('id', $resultado->primeiro_piloto)->update(['vitorias' => $vitoriasPilotoUpdate]);   
         
@@ -272,7 +285,6 @@ class EventoController extends Controller
         
         $polesEquipeUpdate = Resultado::where('pole_equipe', $resultado->pole_equipe)->count();
         Equipe::where('id', $resultado->pole_equipe)->update(['poles' => $polesEquipeUpdate]); 
-
 
         //atualizar os dados e devolver
         return redirect()->back();

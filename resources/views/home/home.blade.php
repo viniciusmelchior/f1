@@ -18,7 +18,7 @@
         <thead>
             <tr>
             <th scope="col">Nome</th>
-            <th scope="col">País de Origem</th>
+            {{-- <th scope="col">País de Origem</th> --}}
             <th scope="col">Vitórias</th>
             </tr>
         </thead>
@@ -27,7 +27,7 @@
         @foreach ($pilotosVitorias as $piloto)
             <tr> 
             <td>{{$piloto->nome}}</td>
-            <td>{{$piloto->pais->nome}}</td>
+            {{-- <td>{{$piloto->pais->nome}}</td> --}}
             <td>{{$piloto->vitorias}}</td>
             </tr>
         @endforeach
@@ -40,7 +40,7 @@
         <thead>
             <tr>
             <th scope="col">Nome</th>
-            <th scope="col">País de Origem</th>
+            {{-- <th scope="col">País de Origem</th> --}}
             <th scope="col">Poles</th>
             </tr>
         </thead>
@@ -49,7 +49,7 @@
         @foreach ($pilotosPoles as $piloto)
             <tr> 
             <td>{{$piloto->nome}}</td>
-            <td>{{$piloto->pais->nome}}</td>
+            {{-- <td>{{$piloto->pais->nome}}</td> --}}
             <td>{{$piloto->poles}}</td>
             </tr>
         @endforeach
@@ -62,7 +62,7 @@
         <thead>
             <tr>
             <th scope="col">Nome</th>
-            <th scope="col">País de Origem</th>
+           {{--  <th scope="col">País de Origem</th> --}}
             <th scope="col">Títulos</th>
             </tr>
         </thead>
@@ -71,7 +71,7 @@
         @foreach ($pilotosTitulos as $piloto)
             <tr> 
             <td>{{$piloto->nome}}</td>
-            <td>{{$piloto->pais->nome}}</td>
+            {{-- <td>{{$piloto->pais->nome}}</td> --}}
             <td>{{$piloto->titulos}}</td>
             </tr>
         @endforeach
@@ -89,7 +89,7 @@
         <thead>
             <tr>
             <th scope="col">Nome</th>
-            <th scope="col">País de Origem</th>
+            {{-- <th scope="col">País de Origem</th> --}}
             <th scope="col">Vitórias</th>
             </tr>
         </thead>
@@ -98,7 +98,7 @@
         @foreach ($equipesVitorias as $equipe)
             <tr> 
             <td>{{$equipe->nome}}</td>
-            <td>{{$equipe->pais->nome}}</td>
+            {{-- <td>{{$equipe->pais->nome}}</td> --}}
             <td>{{$equipe->vitorias}}</td>
             </tr>
         @endforeach
@@ -111,7 +111,7 @@
         <thead>
             <tr>
             <th scope="col">Nome</th>
-            <th scope="col">País de Origem</th>
+            {{-- <th scope="col">País de Origem</th> --}}
             <th scope="col">Poles</th>
             </tr>
         </thead>
@@ -120,7 +120,7 @@
         @foreach ($equipesPoles as $equipe)
             <tr> 
             <td>{{$equipe->nome}}</td>
-            <td>{{$equipe->pais->nome}}</td>
+            {{-- <td>{{$equipe->pais->nome}}</td> --}}
             <td>{{$equipe->poles}}</td>
             </tr>
         @endforeach
@@ -133,7 +133,7 @@
         <thead>
             <tr>
             <th scope="col">Nome</th>
-            <th scope="col">País de Origem</th>
+           {{--  <th scope="col">País de Origem</th> --}}
             <th scope="col">Títulos</th>
             </tr>
         </thead>
@@ -142,7 +142,7 @@
         @foreach ($equipesTitulos as $equipe)
             <tr> 
             <td>{{$equipe->nome}}</td>
-            <td>{{$equipe->pais->nome}}</td>
+            {{-- <td>{{$equipe->pais->nome}}</td> --}}
             <td>{{$equipe->titulos}}</td>
             </tr>
         @endforeach
@@ -169,13 +169,14 @@
                         <td>{{$campeao->temporada->ano}}</td>
                         <td>{{$campeao->piloto->nome}}</td>
                         <td>{{$campeao->equipe->nome}}</td>
-                        <td><a href="">Editar</a></td>
+                        <td><a href="{{url("edita-campeao/$campeao->id")}}">Editar</a></td>
                         <td><a href="{{url("deleta-campeao/$campeao->id")}}">Apagar</a></td>
                     </tr>
                 @endforeach
               
             </tbody>
           </table>
+          <div>Total de Temporadas: {{$totCampeao}}</div>
 
           <!--Card estatisticas pilotos-->
           <h3 class="text-center pb-2 pt-2 bg-danger text-light mt-5">Estatisticas dos Pilotos</h3>
@@ -188,7 +189,7 @@
                 <table class="table table-sm">
                     <thead>
                       <tr>
-                        <th class="text-center">Origem</th>
+                       {{--  <th class="text-center">Origem</th> --}}
                         <th class="text-center">Vitórias</th>
                         <th class="text-center">Poles</th>
                         <th class="text-center">Títulos</th>
@@ -196,7 +197,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="text-center">{{$piloto->pais->nome}}</td>
+                        {{-- <td class="text-center">{{$piloto->pais->nome}}</td> --}}
                         <td class="text-center">{{$piloto->vitorias}}</td>
                         <td class="text-center">{{$piloto->poles}}</td>
                         <td class="text-center">{{$piloto->titulos}}</td>
@@ -240,6 +241,7 @@
                 @endforeach
                 </tbody>
             </table>
+            <div>Total de Eventos: {{$totEventos}}</div>
    
     </div>
 

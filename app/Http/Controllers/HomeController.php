@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     //
+
     public function index(){
 
         //pegar todas as pistas
@@ -38,12 +39,13 @@ class HomeController extends Controller
         $temporadas = Temporada::all();
 
         //recuperar campeoes
-        $campeoes = Campeao::all();
+        $campeoes = Campeao::orderBy('temporada_id')->get();
 
         //recuperar eventos
         $resultados = Resultado::all();
 
-
+        $totCampeao = Campeao::count();
+        $totEventos = Resultado::count();
 
         //enviar dados para view
         return view('home.home',[
@@ -59,7 +61,9 @@ class HomeController extends Controller
             'equipes' => $equipes,
             'temporadas' => $temporadas,
             'campeoes' => $campeoes,
-            'resultados' => $resultados
+            'resultados' => $resultados,
+            'totEventos' => $totEventos,
+            'totCampeao' => $totCampeao
         ]);
 
     }

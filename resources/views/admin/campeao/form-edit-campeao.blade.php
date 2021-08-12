@@ -12,40 +12,47 @@
 
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-              <h1 class="display-4 text-center">Cadastrar Campeão</h1>
+              <h1 class="display-4 text-center">Editar Campeão -> {{$campeao->piloto->nome}}/{{$campeao->temporada->ano}}</h1>
             </div>
           </div>
-          <form method="POST" action="{{route('adiciona-campeao')}}">
+          <form method="POST" action="{{url("editar-campeao/$campeao->id")}}">
             @csrf
+            @method('PUT')
             <div class="form-group">
               <label for="nome_piloto">Temporada</label>
-              <select class="form-control" id="nome" name="temporada_id" >
-                <option value="" disabled selected>--Selecione a Temporada--</option>
+              <select multiple class="form-control" id="nome" name="temporada_id" >
                 @foreach ($temporadas as $temporada )
-                    <option value="{{$temporada->id}}">{{$temporada->ano}}</option>
+                    <option value="{{$temporada->id}}"
+                        {{ $temporada->id == $campeao->temporada->id ? 'selected' : ''}}>
+                        {{$temporada->ano}}
+                    </option>
                 @endforeach
               </select>
             </div>
             <div class="form-group">
               <label for="exampleFormControlSelect2">Piloto Campeão</label>
-              <select class="form-control" id="nome_piloto" name="piloto_id" >
-                <option value="" disabled selected>--Selecione um Piloto--</option>
+              <select multiple class="form-control" id="nome_piloto" name="piloto_id" >
                 @foreach ($pilotos as $piloto )
-                    <option value="{{$piloto->id}}">{{$piloto->nome}}</option>
+                    <option value="{{$piloto->id}}"
+                        {{ $piloto->id == $campeao->piloto->id ? 'selected' : ''}}>
+                        {{$piloto->nome}}
+                    </option>
                 @endforeach
               </select>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect2">Equipe Campeã</label>
-                <select class="form-control" id="nome_equipe" name="equipe_id">
-                  <option value="" disabled selected>--Selecione uma Equipe--</option>
+                <select multiple class="form-control" id="nome_equipe" name="equipe_id" >
                   @foreach ($equipes as $equipe )
-                      <option value="{{$equipe->id}}">{{$equipe->nome}}</option>
+                      <option value="{{$equipe->id}}"
+                        {{ $equipe->id == $campeao->equipe->id ? 'selected' : ''}}>
+                        {{$equipe->nome}}
+                    </option>
                   @endforeach
                 </select>
               </div>
               <div class="d-flex">
-              <button type="submit" class="btn btn-success">Cadastrar</button>
+              <button type="submit" class="btn btn-success">Editar</button>
               <a href="{{route('dashboard')}}" class="btn btn-primary ml-2">Dashboard</a>
               <a href="{{route('home')}}" class="btn btn-danger ml-2">Home</a>
             </div>

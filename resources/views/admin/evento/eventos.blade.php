@@ -10,6 +10,16 @@
   <body>
     <div class="container">
 
+      @if (session('errors'))
+          <div class="alert alert-danger" role="alert">
+              <ul>
+                @foreach ($errors->all() as $message)
+                  <li>{{ $message }}</li>
+                @endforeach
+              </ul>
+            </div>
+       @endif
+
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
               <h1 class="display-4 text-center">Criar evento</h1>
@@ -29,6 +39,7 @@
                   </select>
              </div>
             </div>
+            <hr>
             <div class="form-group row">
                 <div class="col-2">
                     <label for="corrida_pista">Pista</label>
@@ -41,30 +52,29 @@
                       </select>
                 </div>
               </div>
+              <hr>
               <div class="form-group row">
                 <div class="col-2">
-                    <label for="pole_piloto">Pole Piloto</label>
+                    <label for="pole_piloto">Pole</label>
                 </div>
-                <div class="col-10">
+                <div class="col-5">
                     <select class="form-control" id="pole_piloto" name="pole_piloto">
+                                <option value="" disabled selected>--Selecione um Piloto--</option>
                             @foreach($pilotos as $piloto)
                                 <option value="{{$piloto->id}}">{{$piloto->nome}}</option>
                              @endforeach
                       </select>
                 </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-2">
-                    <label for="pole_equipe">Pole Equipe</label>
-                </div>
-                <div class="col-10">
-                    <select class="form-control" id="pole_equipe" name="pole_equipe">
-                            @foreach($equipes as $equipe)
-                                <option value="{{$equipe->id}}">{{$equipe->nome}}</option>
-                             @endforeach
-                      </select>
-                </div>
-              </div>
+              <div class="col-5">
+                <select class="form-control" id="pole_equipe" name="pole_equipe">
+                            <option value="" disabled selected>--Selecione uma Equipe--</option>
+                        @foreach($equipes as $equipe)
+                            <option value="{{$equipe->id}}">{{$equipe->nome}}</option>
+                         @endforeach
+                  </select>
+            </div>
+            </div>
+            <hr>
               <div class="form-group row">
                 <div class="col-2">
                     <label for="primeiro_piloto">1°Colocado - Piloto</label>
@@ -159,9 +169,7 @@
               <a href="{{route('home')}}" class="btn btn-danger ml-2">Home</a>
             </div>
           </form>
-
-
-
+          
     </div>
 
     

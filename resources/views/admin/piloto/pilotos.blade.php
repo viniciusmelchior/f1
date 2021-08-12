@@ -19,11 +19,12 @@
             @csrf
             <div class="form-group">
               <label for="nome">Nome</label>
-              <input type="text" class="form-control" id="nome" name="nome" placeholder="Michael Schumacher">
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do Piloto">
             </div>
             <div class="form-group">
               <label for="exampleFormControlSelect2">Nacionalidade</label>
-              <select multiple class="form-control" id="pais_id" name="pais_id">
+              <select class="form-control" id="pais_id" name="pais_id">
+                <option value="" disabled selected>--Selecione um País--</option>
                  @foreach ($paises as $pais)
                      <option value="{{$pais->id}}">{{$pais->nome}}</option>
                  @endforeach 
