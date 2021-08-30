@@ -48,10 +48,20 @@ class CampeaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validar se a temporada já tem campeão
+
         $temporada = $request->temporada_id;
         $pilotoCampeao = $request->piloto_id;
         $equipeCampea = $request->equipe_id;
+
+        $campeao = new Campeao();
+        $campeaoExiste = $campeao->where('temporada_id', $temporada)->get()->first();
+
+        if(isset($campeaoExiste->temporada_id)){
+            return back()->withErrors(['errors' => 'temporada com campeão já cadastrado']);
+        }
+
+
         Campeao::create([
             'temporada_id' => $temporada,
             'piloto_id' => $pilotoCampeao,
@@ -71,8 +81,6 @@ class CampeaoController extends Controller
             Equipe::where('id', $equipe->id)->update(['titulos' => $titulosEquipeUpdate]);   
         }
 
-        
-       
        return redirect('form-adiciona-campeao');
     }
 

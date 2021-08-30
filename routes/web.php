@@ -42,6 +42,10 @@ route::post('/adiciona-equipe', [EquipeController::class, 'store'])->name('adici
 
 route::get('/form-adiciona-temporada', [TemporadaController::class, 'create'])->name('form-adiciona-temporada');
 route::post('/adiciona-temporada', [TemporadaController::class, 'store'])->name('adiciona-temporada');
+route::get('/temporadas', [TemporadaController::class, 'index'])->name('temporadas');
+route::get('/temporadas/edit/{id}', [TemporadaController::class, 'edit'])->name('temporadas-edit-form');
+route::put('/temporadas/edit/{id}', [TemporadaController::class, 'update'])->name('editar-temporada');
+route::get('/temporada/deleta/{id}', [TemporadaController::class, 'destroy'])->name('deleta-temporada');
 
 route::get('/form-adiciona-campeao', [CampeaoController::class, 'create'])->name('form-adiciona-campeao');
 route::post('/adiciona-campeao', [CampeaoController::class, 'store'])->name('adiciona-campeao');

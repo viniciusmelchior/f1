@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <title>Home</title>
+    <title>F1 Stats</title>
+    <style>
+        footer{
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 2em;
+            margin-top: 1em;
+        }
+    </style>
 </head>
 <body>
 
     <a href="{{route('dashboard')}}" class="btn btn-primary ml-2">Dashboard</a>
+    
+
     <div class="container">
         <h3 class="text-center pb-2 pt-2 bg-dark text-light">Estatisticas dos Pilotos</h3>
         <div class="card-deck">
@@ -19,7 +30,7 @@
             <tr>
             <th scope="col">Nome</th>
             {{-- <th scope="col">País de Origem</th> --}}
-            <th scope="col">Vitórias</th>
+            <th scope="col">Total</th>
             </tr>
         </thead>
         <tbody>
@@ -41,7 +52,7 @@
             <tr>
             <th scope="col">Nome</th>
             {{-- <th scope="col">País de Origem</th> --}}
-            <th scope="col">Poles</th>
+            <th scope="col">Total</th>
             </tr>
         </thead>
         <tbody>
@@ -63,7 +74,7 @@
             <tr>
             <th scope="col">Nome</th>
            {{--  <th scope="col">País de Origem</th> --}}
-            <th scope="col">Títulos</th>
+            <th scope="col">Total</th>
             </tr>
         </thead>
         <tbody>
@@ -90,7 +101,7 @@
             <tr>
             <th scope="col">Nome</th>
             {{-- <th scope="col">País de Origem</th> --}}
-            <th scope="col">Vitórias</th>
+            <th scope="col">Total</th>
             </tr>
         </thead>
         <tbody>
@@ -112,7 +123,7 @@
             <tr>
             <th scope="col">Nome</th>
             {{-- <th scope="col">País de Origem</th> --}}
-            <th scope="col">Poles</th>
+            <th scope="col">Total</th>
             </tr>
         </thead>
         <tbody>
@@ -134,7 +145,7 @@
             <tr>
             <th scope="col">Nome</th>
            {{--  <th scope="col">País de Origem</th> --}}
-            <th scope="col">Títulos</th>
+            <th scope="col">Total</th>
             </tr>
         </thead>
         <tbody>
@@ -154,6 +165,7 @@
 
         <!--Listagem dos campeões por temporada-->
         <h3 class="text-center pb-2 pt-2 bg-danger text-light mt-5">Campeões por Temporada</h3>
+        @if ($temCampeao == true)   
         <table class="table">
             <thead>
               <tr>
@@ -177,6 +189,12 @@
             </tbody>
           </table>
           <div>Total de Temporadas: {{$totCampeao}}</div>
+          @else
+            <div>
+                <p class="text-center">Sem registro de campeões</p>
+            </div>
+          @endif
+             
 
           <!--Card estatisticas pilotos-->
           <h3 class="text-center pb-2 pt-2 bg-danger text-light mt-5">Estatisticas dos Pilotos</h3>
@@ -211,6 +229,7 @@
           </div>
            <!--RESULTADOS POR CORRIDA-->
             <h5 class="text-center pb-3 pt-3 bg-dark text-light">Resultados</h5>
+            @if($temResultado == true)
             <table class="table table-sm">
                 <thead>
                 <tr>
@@ -241,55 +260,16 @@
                 @endforeach
                 </tbody>
             </table>
+            @else
+                <div>
+                    <p class="text-center">Sem registro de resultados</p>
+                </div>
+            @endif
             <div>Total de Eventos: {{$totEventos}}</div>
-   
     </div>
 
-    
-
-   
-
-
-
-
-    <!--PARTE DE TESTES-->
-   {{--  <h1>Home - Projeto Formula 1</h2>
-
-        <div>
-            <h3>Temporadas</h3>
-            @foreach ($temporadas as $temporada )
-            <p>Temporada: {{$temporada->ano}}</p>
-            @endforeach
-        </div>
-
-        <div>
-            <h3>Pistas</h3>
-            @foreach ($pistas as $pista )
-                <p>{{$pista->nome}} - {{$pista->pais->nome}}</p>
-            @endforeach
-        </div>
-
-        <div>
-            <h3>Países Envolvidos na Competição</h3>
-            @foreach ($paises as $pais )
-                <p>{{$pais->nome}}</p>
-            @endforeach
-        </div>
-
-        <div>
-            <h3>Equipes</h3>
-            @foreach ($equipes as $equipe )
-            <p>Nome: {{$equipe->nome}}</p>
-            <p>País de Origem - {{$equipe->pais->nome}}</p>
-            <p>Vitorias: {{$equipe->vitorias}}</p>
-            <p>Poles: {{$equipe->poles}}</p>
-            <p>Títulos: {{$equipe->titulos}}</p>
-            <hr>
-            @endforeach
-        </div> --}}
-
-        
-
-
+    <footer>
+        <p>Desenvolvido por &copy;Vinicius Melchior | {{date('Y')}}</p>
+    </footer>
 </body>
 </html>

@@ -13,8 +13,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    //
-
+    
     public function index(){
 
         //pegar todas as pistas
@@ -39,10 +38,19 @@ class HomeController extends Controller
         $temporadas = Temporada::all();
 
         //recuperar campeoes
+        $temCampeao = false;
         $campeoes = Campeao::orderBy('temporada_id')->get();
+        if(!$campeoes->isEmpty()){
+            $temCampeao = true;
+        }
 
         //recuperar eventos
         $resultados = Resultado::all();
+        $temResultado = false;
+        $campeoes = Campeao::orderBy('temporada_id')->get();
+        if(!$resultados->isEmpty()){
+            $temResultado = true;
+        }
 
         $totCampeao = Campeao::count();
         $totEventos = Resultado::count();
@@ -63,7 +71,9 @@ class HomeController extends Controller
             'campeoes' => $campeoes,
             'resultados' => $resultados,
             'totEventos' => $totEventos,
-            'totCampeao' => $totCampeao
+            'totCampeao' => $totCampeao,
+            'temCampeao' => $temCampeao,
+            'temResultado' => $temResultado
         ]);
 
     }

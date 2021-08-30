@@ -57,7 +57,7 @@ body{
 <div class="sidebar">
    <h1>Painel</h1>
     <a href="{{route('home')}}">Home</a>
-    <a href="{{route('form-adiciona-temporada')}}">Cadastrar Temporada</a>
+    <a href="{{route('temporadas')}}">Temporadas</a>
     <a href="{{route('form-adiciona-pais')}}">Cadastrar Países</a>
     <a href="{{route('form-adiciona-piloto')}}">Cadastrar Pilotos</a>
     <a href="{{route('form-adiciona-equipe')}}">Cadastrar Equipes</a>

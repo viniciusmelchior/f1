@@ -72,16 +72,7 @@ class EventoController extends Controller
 
         //inserir validações
 
-        //criar corrida
-        $corrida = Corrida::create([
-            'temporada_id' => $temporada_id,
-            'pista_id' => $pista_id
-        ]);
-        
-        //pegar a corrida criada e já recuperar o id dela
-        $ultimoId = $corrida->id;
-        //criar resultado
-        $corrida_id = $ultimoId;
+          //certificar que nao tenha repetição de pilotos nos inputs
         $pole_piloto = $request->pole_piloto; 
         $pole_equipe = $request->pole_equipe;
         $primeiro_piloto = $request->primeiro_piloto;
@@ -92,8 +83,21 @@ class EventoController extends Controller
         $terceiro_equipe = $request->terceiro_equipe;
         $eu_largada = $request->eu_largada;
         $eu_chegada = $request->eu_chegada;
+
+          if($primeiro_piloto == $segundo_piloto || $primeiro_piloto == $terceiro_piloto || $terceiro_piloto == $segundo_piloto){
+            return back()->withErrors(['errors' => 'Dados repetidos no formulário. Verificar!']);
+        }
+
+        //criar corrida
+        $corrida = Corrida::create([
+            'temporada_id' => $temporada_id,
+            'pista_id' => $pista_id
+        ]);
         
-        //refatorando atualizações no banco
+        //pegar a corrida criada e já recuperar o id dela
+        $ultimoId = $corrida->id;
+        //criar resultado
+        $corrida_id = $ultimoId;
         
         //salvar o evento no banco 
         Resultado::create([

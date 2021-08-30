@@ -9,6 +9,15 @@
   </head>
   <body>
     <div class="container">
+      @if (session('errors'))
+      <div class="alert alert-danger" role="alert">
+          <ul>
+            @foreach ($errors->all() as $message)
+              <li>{{ $message }}</li>
+            @endforeach
+          </ul>
+        </div>
+    @endif
 
         <div class="jumbotron jumbotron-fluid">
             <div class="container">

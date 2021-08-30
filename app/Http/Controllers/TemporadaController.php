@@ -13,8 +13,9 @@ class TemporadaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $temporadas = Temporada::all();
+        return view('admin.temporada.temporada-index', ['temporadas' => $temporadas]);
     }
 
     /**
@@ -36,13 +37,19 @@ class TemporadaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validar se o ano ja nao está cadastrado
         $ano = $request->ano;
+        $temporada = new Temporada();
+        $existe = $temporada->where('ano', $ano)->get()->first();
+        if(isset($existe->ano)){
+            return back()->withErrors(['errors' => 'temporada '.$ano." já está cadastrada"]);
+        }
+       
         Temporada::create([
             'ano' => $ano
         ]);
 
-        return redirect('form-adiciona-temporada');
+        return redirect()->route('temporadas');
     }
 
     /**
@@ -63,8 +70,13 @@ class TemporadaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        //dd('chegamos no edit');
+        $temporada = Temporada::find($id);
+        //dd($temporada->ano);
+        return view('admin.temporada.temporada-edit-form', [
+            'temporada' => $temporada
+        ]);
     }
 
     /**
@@ -76,7 +88,21 @@ class TemporadaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $temporadaEditar = Temporada::find($id);
+
+        //validar se o ano ja nao está cadastrado
+        $ano = $request->ano;
+        $temporada = new Temporada();
+        $existe = $temporada->where('ano', $ano)->get()->first();
+        if(isset($existe->ano)){
+            return back()->withErrors(['errors' => 'temporada '.$ano." já está cadastrada"]);
+        }
+
+        $temporadaEditar->update([
+            'ano' => $ano
+        ]);
+
+        return redirect()->route('temporadas');
     }
 
     /**
@@ -87,6 +113,7 @@ class TemporadaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $temporada = Temporada::find($id)->delete();
+        return redirect()->back();
     }
 }

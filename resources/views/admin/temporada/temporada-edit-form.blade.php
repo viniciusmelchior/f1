@@ -10,25 +10,26 @@
   <body>
     <div class="container">
       @if (session('errors'))
-          <div class="alert alert-danger" role="alert">
-              <ul>
-                @foreach ($errors->all() as $message)
-                  <li>{{ $message }}</li>
-                @endforeach
-              </ul>
-            </div>
-       @endif
+        <div class="alert alert-danger" role="alert">
+            <ul>
+              @foreach ($errors->all() as $message)
+                <li>{{ $message }}</li>
+              @endforeach
+            </ul>
+          </div>
+      @endif
 
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-              <h1 class="display-4 text-center">Painel de Temporadas</h1>
+              <h1 class="display-4 text-center">Editar temporada <em>{{$temporada->ano}}</em></h1>
             </div>
           </div>
-          <form method="POST" action="{{route('adiciona-temporada')}}">
+          <form method="POST" action="{{url("temporadas/edit/$temporada->id")}}">
             @csrf
+            @method('PUT')
             <div class="form-group">
               <label for="ano">Ano</label>
-              <input type="text" class="form-control" id="ano" name="ano" placeholder="1977">
+              <input type="text" class="form-control" id="ano" name="ano" placeholder="1977" value="{{$temporada->ano}}">
             </div>
             <div class="d-flex">
               <button type="submit" class="btn btn-success">
