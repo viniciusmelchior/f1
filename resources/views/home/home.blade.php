@@ -269,7 +269,7 @@
     </div>
 
     <footer>
-        <p>Desenvolvido por &copy;Vinicius Melchior | {{date('Y')}}</p>
+        <p>Desenvolvido por &copy;Vinicius Melchior | {{date('Y')}} </p>
     </footer>
 </body>
 </html>
